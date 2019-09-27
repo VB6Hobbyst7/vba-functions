@@ -515,35 +515,6 @@ Public Function errorMessage(requiredFile As String)
 End Function
 
 
-
-Public Function mostRecentVC(Optional fy As Long)
-'Returns the FULL PATH to the most recent ViewCreation file
-
-    '=========================================================================
-    Const yearlyDataFolder = "\\TYMX-FS-001v\afrs\AFRS_Org\RSO (FOUO)\RSOA (FOUO)\RSOAP\_Data\Yearly Data"
-    Dim searchFolder As String
-    Dim maxMonthFolder As String, maxDayFolder As String
-    '========================================================================
-    
-    'If FY was not supplied, take the FY of today's date
-    If fy = 0 Then
-        fy = Year(Date) - 2000
-        If Month(Date) >= 10 Then: fy = fy + 1
-    End If
-    
-    'Search within the Yearly data folder for the max month
-    searchFolder = yearlyDataFolder & "\" & "FY" & fy
-    maxMonthFolder = findMaxFolder(searchFolder)
-    'Search within the max month folder for the max date
-    searchFolder = searchFolder & "\" & maxMonthFolder
-    maxDayFolder = findMaxFolder(searchFolder)
-    
-    searchFolder = searchFolder & "\" & maxDayFolder
-    mostRecentVC = searchFolder & "\" & findFile(searchFolder, "ViewCreation", True, "xlsx") '"txt"
-   
-End Function
-
-
 Public Function findMaxFolder(searchDirectory As String) As String
 'Finds the folder with the largest numeric value
 
